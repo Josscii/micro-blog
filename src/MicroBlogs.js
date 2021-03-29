@@ -61,9 +61,14 @@ export default function MicroBlogs() {
                 )}
               </p>
             </div>
-            <p className="text-base">{issue.body}</p>
+            <p
+              className="text-base"
+              style={{ whiteSpace: "pre-line", wordBreak: "break-word" }}
+            >
+              {issue.body}
+            </p>
             {issue.images.map((image) => (
-              <img src={image} alt={image} key={image} />
+              <img className="mt-2" src={image} alt={image} key={image} />
             ))}
           </li>
         ))}
