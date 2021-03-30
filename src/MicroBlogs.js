@@ -43,7 +43,10 @@ export default function MicroBlogs() {
     <>
       <ul>
         {parsedIssues.map((issue) => (
-          <li className="border rounded p-2 text-sm mb-2" key={issue.id}>
+          <li
+            className="border border-theme-border-light dark:border-theme-border-dark rounded p-2 text-sm mb-2"
+            key={issue.id}
+          >
             <div className="flex justify-between mb-1">
               <p>
                 <span>{issue.date}</span>
@@ -76,9 +79,11 @@ export default function MicroBlogs() {
       {loading && <img className="mx-auto w-5 h-5" src={oval} alt="loading" />}
       {!loading && (
         <footer className="flex justify-center items-center">
-          <span className="border-t border-gray-300 w-10"></span>
-          <span className="text-sm text-gray-300 text-center py-4">到底了</span>
-          <span className="border-t border-gray-300 w-10"></span>
+          <span className="border-t border-theme-border-light dark:border-theme-border-dark w-10"></span>
+          <span className="text-sm text-theme-border-light dark:text-theme-border-dark text-center py-4">
+            到底了
+          </span>
+          <span className="border-t border-theme-border-light dark:border-theme-border-dark w-10"></span>
         </footer>
       )}
     </>
