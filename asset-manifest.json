@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/micro-blog/static/css/main.a4684b56.chunk.css",
-    "main.js": "/micro-blog/static/js/main.6c503b41.chunk.js",
-    "main.js.map": "/micro-blog/static/js/main.6c503b41.chunk.js.map",
+    "main.css": "/micro-blog/static/css/main.070af0fc.chunk.css",
+    "main.js": "/micro-blog/static/js/main.5239d80c.chunk.js",
+    "main.js.map": "/micro-blog/static/js/main.5239d80c.chunk.js.map",
     "runtime-main.js": "/micro-blog/static/js/runtime-main.e61c26a0.js",
     "runtime-main.js.map": "/micro-blog/static/js/runtime-main.e61c26a0.js.map",
-    "static/js/2.17a16586.chunk.js": "/micro-blog/static/js/2.17a16586.chunk.js",
-    "static/js/2.17a16586.chunk.js.map": "/micro-blog/static/js/2.17a16586.chunk.js.map",
+    "static/js/2.09e25427.chunk.js": "/micro-blog/static/js/2.09e25427.chunk.js",
+    "static/js/2.09e25427.chunk.js.map": "/micro-blog/static/js/2.09e25427.chunk.js.map",
     "index.html": "/micro-blog/index.html",
-    "static/css/main.a4684b56.chunk.css.map": "/micro-blog/static/css/main.a4684b56.chunk.css.map",
-    "static/js/2.17a16586.chunk.js.LICENSE.txt": "/micro-blog/static/js/2.17a16586.chunk.js.LICENSE.txt",
+    "static/css/main.070af0fc.chunk.css.map": "/micro-blog/static/css/main.070af0fc.chunk.css.map",
+    "static/js/2.09e25427.chunk.js.LICENSE.txt": "/micro-blog/static/js/2.09e25427.chunk.js.LICENSE.txt",
     "static/media/oval.6226dee9.svg": "/micro-blog/static/media/oval.6226dee9.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.e61c26a0.js",
-    "static/js/2.17a16586.chunk.js",
-    "static/css/main.a4684b56.chunk.css",
-    "static/js/main.6c503b41.chunk.js"
+    "static/js/2.09e25427.chunk.js",
+    "static/css/main.070af0fc.chunk.css",
+    "static/js/main.5239d80c.chunk.js"
   ]
 }
