@@ -9,11 +9,13 @@ module.exports = {
         "theme-text-dark": "#adbac7",
         "theme-text-secondary-dark": "#768390",
         "theme-bg-dark": "#22272e",
+        "theme-link-dark": "#539bf5",
 
         "theme-border-light": "#e1e4e8",
         "theme-text-light": "#24292e",
         "theme-text-secondary-light": "#586069",
         "theme-bg-light": "#ffffff",
+        "theme-link-light": "#0366d6",
       },
     },
   },

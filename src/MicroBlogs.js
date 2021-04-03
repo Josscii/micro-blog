@@ -16,8 +16,31 @@ export default function MicroBlogs() {
         },
       })
         .then((response) => response.json())
-        .then((data) => {
-          setIssues(data);
+        .then((issues) => {
+          const regex = /(?:!\[(.*?)\]\((.*?)\))/g;
+
+          const parsedIssues = issues.map((issue) => {
+            return {
+              id: issue.id,
+              date: dayjs(issue.created_at).format("YYYY-MM-DD HH:mm"),
+              labels: issue.labels,
+              body: issue.body.replace(regex, "").trim(),
+              images: Array.from(issue.body.matchAll(regex)).map(
+                (match) => match[2]
+              ),
+              canExpand: function () {
+                return this.body.length > 400;
+              },
+              expanded: false,
+              text: function () {
+                return this.expanded || !this.canExpand()
+                  ? this.body
+                  : this.body.substring(0, 400) + "...";
+              },
+            };
+          });
+
+          setIssues(parsedIssues);
         })
         .catch(console.log)
         .finally(() => setLoading(false));
@@ -27,22 +50,22 @@ export default function MicroBlogs() {
     fetchData();
   }, []);
 
-  const regex = /(?:!\[(.*?)\]\((.*?)\))/g;
-
-  const parsedIssues = issues.map((issue) => {
-    return {
-      id: issue.id,
-      date: dayjs(issue.created_at).format("YYYY-MM-DD HH:mm"),
-      labels: issue.labels,
-      body: issue.body.replace(regex, "").trim(),
-      images: Array.from(issue.body.matchAll(regex)).map((match) => match[2]),
-    };
-  });
+  var handleExpandClick = (issueId) => {
+    setIssues((issues) => {
+      return issues.map((issue) => {
+        if (issue.id === issueId) {
+          return { ...issue, expanded: !issue.expanded };
+        } else {
+          return issue;
+        }
+      });
+    });
+  };
 
   return (
     <>
       <ul>
-        {parsedIssues.map((issue) => (
+        {issues.map((issue) => (
           <li
             className="border border-theme-border-light dark:border-theme-border-dark rounded p-2 text-sm mb-2"
             key={issue.id}
@@ -68,7 +91,17 @@ export default function MicroBlogs() {
               className="text-base"
               style={{ whiteSpace: "pre-line", wordBreak: "break-word" }}
             >
-              {issue.body}
+              {issue.text()}
+              {issue.canExpand() && (
+                <span
+                  className="text-theme-link-light dark:text-theme-link-dark cursor-pointer ml-1"
+                  onClick={() => {
+                    handleExpandClick(issue.id);
+                  }}
+                >
+                  {issue.expanded ? "收起" : "展开"}
+                </span>
+              )}
             </p>
             {issue.images.map((image) => (
               <img className="mt-2" src={image} alt={image} key={image} />
