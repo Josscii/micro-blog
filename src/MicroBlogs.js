@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import dayjs from "dayjs";
 import oval from "./oval.svg";
+import "./App.css";
+import ReactMarkdown from "react-markdown";
+import gfm from "remark-gfm";
 
 const ISSUE_URL = "https://api.github.com/repos/josscii/micro-blog/issues";
 
@@ -17,25 +20,20 @@ export default function MicroBlogs() {
       })
         .then((response) => response.json())
         .then((issues) => {
-          const regex = /(?:!\[(.*?)\]\((.*?)\))/g;
-
           const parsedIssues = issues.map((issue) => {
             return {
               id: issue.id,
               date: dayjs(issue.created_at).format("YYYY-MM-DD HH:mm"),
               labels: issue.labels,
-              body: issue.body.replace(regex, "").trim(),
-              images: Array.from(issue.body.matchAll(regex)).map(
-                (match) => match[2]
-              ),
+              body: issue.body,
               canExpand: function () {
-                return this.body.length > 400;
+                return this.body.length > 300;
               },
               expanded: false,
               text: function () {
                 return this.expanded || !this.canExpand()
                   ? this.body
-                  : this.body.substring(0, 400) + "...";
+                  : this.body.substring(0, 300) + "...";
               },
             };
           });
@@ -87,25 +85,21 @@ export default function MicroBlogs() {
                 )}
               </p>
             </div>
-            <p
-              className="text-base"
-              style={{ whiteSpace: "pre-line", wordBreak: "break-word" }}
-            >
+            <ReactMarkdown remarkPlugins={[gfm]} className="text-base">
               {issue.text()}
-              {issue.canExpand() && (
+            </ReactMarkdown>
+            {issue.canExpand() && (
+              <div className="text-right -mt-1">
                 <span
-                  className="text-theme-link-light dark:text-theme-link-dark cursor-pointer ml-1"
+                  className="text-base text-theme-link-light dark:text-theme-link-dark cursor-pointer"
                   onClick={() => {
                     handleExpandClick(issue.id);
                   }}
                 >
                   {issue.expanded ? "收起" : "展开"}
                 </span>
-              )}
-            </p>
-            {issue.images.map((image) => (
-              <img className="mt-2" src={image} alt={image} key={image} />
-            ))}
+              </div>
+            )}
           </li>
         ))}
       </ul>
